@@ -1,0 +1,111 @@
+<form [formGroup]="addMore">
+  <ul class="flex-outer" id="form-entrenamiento">
+    <li>
+      <label for="id-plani"> Planificacion</label>
+      <input
+        type="text"
+        id="first-name"
+        placeholder="Planificacion"
+        formControlName="planificacion"
+      />
+    </li>
+    <li>
+      <label for="last-name">Comentarios</label>
+      <textarea
+        id="message"
+        rows="6"
+        rows="10"
+        placeholder="Enter your message here"
+        formControlName="comentariosP"
+      ></textarea>
+    </li>
+    <li>
+      <p>Hacer visible?</p>
+      <ul class="flex-inner">
+        <li>
+          <input
+            type="checkbox"
+            id="twenty-to-twentynine"
+            formControlName="visible"
+          />
+          <label for="twenty-to-twentynine"></label>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>
+        <b> <u> Secciones</u></b>
+      </p>
+    </li>
+
+    <div formArrayName="secciones">
+      <div *ngFor="let seccion of secciones().controls; let secIndex = index">
+        <div [formGroupName]="secIndex">
+          Seccion {{ secIndex + 1 }} <br />
+
+          <input
+            type="email"
+            id="tipo"
+            placeholder="Enter youremail here"
+            formControlName="tipo"
+          />
+          <textarea
+            id="comentariosS"
+            rows="6"
+            rows="10"
+            placeholder="Enter your message here"
+            formControlName="comentariosS"
+          ></textarea>
+          <button (click)="borrarSeccion(secIndex)">Borrar</button>
+          <div formArrayName="wods">
+            <div
+              *ngFor="let wod of wods(secIndex).controls; let wodIndex = index"
+            >
+              <div [formGroupName]="wodIndex">
+                Wod {{ wodIndex + 1 }} <br />
+                <label for="descWod">Descripcion</label>
+                <textarea
+                  id="descWod"
+                  rows="6"
+                  rows="10"
+                  placeholder="Descripcion Wod"
+                  formControlName="descripcion"
+                ></textarea>
+                <label for="score">Tipo de score</label>
+                <input
+                  type="score"
+                  id="score"
+                  placeholder="Tipo de Score"
+                  formControlName="tipoScore"
+                />
+                <label for="comentarioWod">Comentarios</label>
+                <textarea
+                  id="descWod"
+                  rows="6"
+                  rows="10"
+                  placeholder="Comentarios Wod"
+                  formControlName="comentariosW"
+                ></textarea>
+                <label for="score">Timer</label>
+                <input
+                  type="score"
+                  id="score"
+                  placeholder="Tipo de Score"
+                  formControlName="idTimer"
+                />
+                <button (click)="borrarWod(secIndex, wodIndex)">Borrar</button>
+              </div>
+            </div>
+            <button (click)="agregarWod(secIndex)">Agregar Wod</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ul>
+</form>
+
+<p>
+  <button (click)="agregarSeccion()">
+    Agregar Seccion
+  </button>
+</p>
