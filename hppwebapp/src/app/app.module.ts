@@ -25,4 +25,4 @@ import { CargaEntrenamientoComponent } from "./components/carga-entrenamiento/ca
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
