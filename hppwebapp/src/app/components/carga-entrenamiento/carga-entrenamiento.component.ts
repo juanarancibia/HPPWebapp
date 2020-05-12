@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormGroup, FormArray } from "@angular/forms";
 import { groupBy } from "rxjs/internal/operators/groupBy";
+import { Entrenamiento } from "../../models/Entrenamiento"
+import { Seccion } from "../../models/Seccion"
+import { Wod } from "../../models/Wod"
 
 @Component({
   selector: "app-carga-entrenamiento",
@@ -10,7 +13,10 @@ import { groupBy } from "rxjs/internal/operators/groupBy";
 export class CargaEntrenamientoComponent implements OnInit {
   addMore: FormGroup;
   secs: FormArray;
-  constructor(private fb: FormBuilder) {}
+  entrenamiento: Entrenamiento;
+
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.addMore = this.fb.group({
@@ -62,5 +68,26 @@ export class CargaEntrenamientoComponent implements OnInit {
 
   borrarSeccion(index: number) {
     this.secciones().removeAt(index);
+  }
+
+  cargarEntrenamiento() {
+
+    let wods: Wod[];
+    let secs: Seccion[] = [];
+    this.addMore.value.secciones.forEach(seccion => {
+
+      wods = [];
+      seccion.wods.forEach(wod => {
+        wods.push(new Wod(wod.descripcion, wod.tipoScore, wod.comentariosW, wod.idTimer))
+      });
+      console.log(secs)
+      secs.push(new Seccion(
+        seccion.tipo,
+        seccion.comentariosS,
+        wods
+      ));
+    });
+    this.entrenamiento = new Entrenamiento(this.addMore.value.planificacion, this.addMore.value.comentariosP, this.addMore.value.visible, secs);
+    console.log(this.entrenamiento);
   }
 }
