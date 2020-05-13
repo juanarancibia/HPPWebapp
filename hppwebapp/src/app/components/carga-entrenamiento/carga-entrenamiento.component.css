@@ -1,4 +1,8 @@
 
+.bg-color{
+ background: #cbc8c1;
+}
+
 .container{
   margin-top: 3%;
 }
@@ -12,12 +16,12 @@
 .titulo-wod{
   font-size: 20px;
   margin-left: 10%;
-  color: grey;
+  color: rgba(255, 0, 0, 0.767);
 }
 
 .titulo-seccion{
   font-size: 26px;
-  color: grey;
+  color: rgb(255, 0, 0);
   font-weight: bold;
   margin-left: 2%;
 }

@@ -19,7 +19,7 @@ export class CargaEntrenamientoComponent implements OnInit {
   addMore: FormGroup;
   secs: FormArray;
   entrenamiento: Entrenamiento;
-  plani: any;
+  planis: Planificacion[];
 
 
   constructor(private fb: FormBuilder, private servicioEnt: EntrenamientoService, private servicioPlani: PlanificacionService) { }
@@ -27,9 +27,9 @@ export class CargaEntrenamientoComponent implements OnInit {
   ngOnInit(): void {
     this.addMore = this.fb.group({
       fecha: [""],
-      planificacion: [""],
+      planificacion: ["", [Validators.required]],
       comentariosP: [""],
-      visible: [""],
+      visible: ["", [Validators.required]],
       secciones: this.fb.array([this.initSecciones()]),
     });
 
@@ -38,9 +38,12 @@ export class CargaEntrenamientoComponent implements OnInit {
   }
 
   cargarPlanifiaciones() {
-    this.servicioPlani.getPlanificaciones().subscribe(data => {
-      this.planisDOM(data);
-    })
+    this.servicioPlani.getPlanificaciones().subscribe(
+      {
+        next: planificacion => { this.planis = planificacion; },
+        error: err => console.log(err)
+      }
+    )
 
   }
 
@@ -54,7 +57,7 @@ export class CargaEntrenamientoComponent implements OnInit {
   initSecciones() {
     console.log(this.addMore);
     return this.fb.group({
-      tipo: [""],
+      tipo: ["", [Validators.required]],
       comentariosS: [""],
       wods: this.fb.array([this.initWods()]),
     });
@@ -62,7 +65,7 @@ export class CargaEntrenamientoComponent implements OnInit {
 
   initWods() {
     return this.fb.group({
-      descripcion: [""],
+      descripcion: ["", [Validators.required]],
       tipoScore: [""],
       comentariosW: [""],
       idTimer: [""],
