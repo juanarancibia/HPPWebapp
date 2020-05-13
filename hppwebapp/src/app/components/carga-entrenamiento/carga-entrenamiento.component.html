@@ -9,11 +9,18 @@
     <p class="titulo-form">Carga de entrenamiento</p>
     <div class="contenedor-seccion">
       <div class="form-group row">
+        <label for="date" class="col-4 col-form-label label-form">Fecha entrenamiento</label>
+        <div class="col-8">
+          <input type="date" name="date" id="date" formControlName="fecha">
+        </div>
+      </div>
+      <div class="form-group row">
         <label for="select" class="col-4 col-form-label label-form">Planificacion</label>
         <div class="col-8">
-          <select id="select" name="select" aria-describedby="selectHelpBlock" class="custom-select"
+          <select id="selectPlanis" name="select" aria-describedby="selectHelpBlock" class="custom-select"
             formControlName="planificacion">
-            <option value="hppastrid">HPP ASTRID TEAM</option>
+            <option value="null"></option>
+
           </select>
           <span id="selectHelpBlock" class="form-text text-muted">Planificacion a la cual cargar el entrenamiento</span>
         </div>
@@ -22,14 +29,14 @@
         <label class="col-4 label-form">Hacer visible?</label>
         <div class="col-8">
           <div class="custom-control custom-radio custom-control-inline">
-            <input name="visible" id="visible_0" type="radio" class="custom-control-input" value="si"
-              aria-describedby="visibleHelpBlock">
-            <label for="visible_0" class="custom-control-label" formControlName="visible">Si</label>
+            <input name="visible" id="visible_0" type="radio" class="custom-control-input" value="1"
+              aria-describedby="visibleHelpBlock" formControlName="visible">
+            <label for="visible_0" class="custom-control-label">Si</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
-            <input name="visible" id="visible_1" type="radio" class="custom-control-input" value="no"
-              aria-describedby="visibleHelpBlock">
-            <label for="visible_1" class="custom-control-label" formControlName="visible">No</label>
+            <input name="visible" id="visible_1" type="radio" class="custom-control-input" value="0"
+              aria-describedby="visibleHelpBlock" formControlName="visible">
+            <label for="visible_1" class="custom-control-label">No</label>
           </div>
           <span id="visibleHelpBlock" class="form-text text-muted">Hacer visible entrenamiento a los atletas</span>
         </div>
@@ -55,9 +62,19 @@
             <label for="tipoSeccion" class="col-4 col-form-label label-form">Tipo seccion</label>
             <div class="col-8">
               <select id="tipoSeccion" name="tipoSeccion" class="custom-select" formControlName="tipo">
-                <option value="activacion">Activacion</option>
-                <option value="rest">Rest</option>
-                <option value="core">Core</option>
+                <option value="Otro"></option>
+                <option value="Fuerza">Fuerza</option>
+                <option value="Activacion">Activacion</option>
+                <option value="Estiramiento">Estiramiento</option>
+                <option value="Wods">Wods</option>
+                <option value="Estructura">Estructura</option>
+                <option value="Zona Media">Zona media</option>
+                <option value="Calentamiento">Calentamiento</option>
+                <option value="Test">Test</option>
+                <option value="Extra">Extra</option>
+                <option value="Cardio">Cardio</option>
+                <option value="Oly">Oly</option>
+                <option value="Rest">Rest</option>
               </select>
             </div>
           </div>
@@ -96,9 +113,11 @@
                   <div class="col-8">
                     <select id="tipoScore" name="tipoScore" aria-describedby="tipoScoreHelpBlock" class="custom-select"
                       formControlName="tipoScore">
-                      <option value="reps">Reps</option>
-                      <option value="peso">Peso</option>
-                      <option value="tiempo">Tiempo</option>
+                      <option value=""></option>
+                      <option value="Reps">Reps</option>
+                      <option value="Peso">Peso</option>
+                      <option value="Tiempo">Tiempo</option>
+                      <option value="Otro">Otro</option>
                     </select>
                     <span id="tipoScoreHelpBlock" class="form-text text-muted">Seleccione el tipo de score para el
                       wod</span>

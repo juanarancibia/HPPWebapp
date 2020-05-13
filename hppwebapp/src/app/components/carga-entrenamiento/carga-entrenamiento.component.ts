@@ -4,6 +4,11 @@ import { groupBy } from "rxjs/internal/operators/groupBy";
 import { Entrenamiento } from "../../models/Entrenamiento"
 import { Seccion } from "../../models/Seccion"
 import { Wod } from "../../models/Wod"
+import { Planificacion } from "../../models/Planificacion"
+import { EntrenamientoService } from "../../services/entrenamiento.service"
+import { PlanificacionService } from "../../services/planificacion.service"
+
+
 
 @Component({
   selector: "app-carga-entrenamiento",
@@ -14,18 +19,37 @@ export class CargaEntrenamientoComponent implements OnInit {
   addMore: FormGroup;
   secs: FormArray;
   entrenamiento: Entrenamiento;
+  plani: any;
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private servicioEnt: EntrenamientoService, private servicioPlani: PlanificacionService) { }
 
   ngOnInit(): void {
     this.addMore = this.fb.group({
+      fecha: [""],
       planificacion: [""],
       comentariosP: [""],
       visible: [""],
       secciones: this.fb.array([this.initSecciones()]),
     });
+
+
+    this.cargarPlanifiaciones();
   }
+
+  cargarPlanifiaciones() {
+    this.servicioPlani.getPlanificaciones().subscribe(data => {
+      this.planisDOM(data);
+    })
+
+  }
+
+  planisDOM(data) {
+    data.resultado.forEach(plani => {
+      document.getElementById("selectPlanis").innerHTML += `<option value="${plani.idPlanificacion}">${plani.nombre}</option>`
+    })
+  }
+
 
   initSecciones() {
     console.log(this.addMore);
@@ -87,7 +111,8 @@ export class CargaEntrenamientoComponent implements OnInit {
         wods
       ));
     });
-    this.entrenamiento = new Entrenamiento(this.addMore.value.planificacion, this.addMore.value.comentariosP, this.addMore.value.visible, secs);
-    console.log(this.entrenamiento);
+    this.entrenamiento = new Entrenamiento(this.addMore.value.planificacion, this.addMore.value.fecha, this.addMore.value.comentariosP, this.addMore.value.visible, secs);
+    console.log(JSON.stringify(this.entrenamiento));
+    this.servicioEnt.cargarEntrenamiento(this.entrenamiento);
   }
 }
