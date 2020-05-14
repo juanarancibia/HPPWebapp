@@ -6,6 +6,7 @@ import {
   FormBuilder,
 } from "@angular/forms";
 import { LoginService } from "src/app/services/login.service";
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
 
 @Component({
   selector: "app-login",
@@ -18,11 +19,10 @@ export class LoginComponent implements OnInit {
     pwd: "",
   };
 
-  token: string;
 
   public loginForm: FormGroup;
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -37,6 +37,11 @@ export class LoginComponent implements OnInit {
       pwd: this.loginForm.value.pwd,
     };
 
-    this.token = this.loginService.logInUsuario(this.user);
+    this.loginService.logInUsuario(this.user).subscribe(
+      {
+        next: tok => { localStorage.setItem('token', tok.token); },
+        error: err => console.log(err)
+      }
+    );
   }
 }

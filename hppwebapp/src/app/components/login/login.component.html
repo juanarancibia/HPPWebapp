@@ -1,39 +1,20 @@
 <div class="login-form">
   <form [formGroup]="loginForm">
     <div class="avatar"><i class="material-icons">&#xE7FF;</i></div>
-    <h4 class="modal-title">Login to Your Account</h4>
+    <h4 class="modal-title">Logueate en tu cuenta</h4>
     <div class="form-group">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Username"
-        required="required"
-        formControlName="email"
-      />
+      <input type="text" class="form-control" placeholder="Email" required="required" formControlName="email" />
     </div>
     <div class="form-group">
-      <input
-        type="password"
-        class="form-control"
-        placeholder="Password"
-        required="required"
-        formControlName="pwd"
-      />
+      <input type="password" class="form-control" placeholder="Contraseña" required="required" formControlName="pwd" />
     </div>
     <div class="form-group small clearfix">
-      <label class="checkbox-inline"
-        ><input type="checkbox" /> Remember me</label
-      >
-      <a href="#" class="forgot-link">Forgot Password?</a>
+      <label class="checkbox-inline"><input type="checkbox" /> Recordarme</label>
+      <a href="#" class="forgot-link">Olvidaste tu contraseña?</a>
     </div>
-    <input
-      type="submit"
-      class="btn btn-primary btn-block btn-lg"
-      value="Login"
-      (click)="login()"
-    />
+    <input type="submit" class="btn btn-primary btn-block btn-lg" value="Login" (click)="login()" />
   </form>
   <div class="text-center small">
-    Don't have an account? <a href="#">Sign up</a>
+    No tenes cuenta? <a href="#">Registrate</a>
   </div>
 </div>

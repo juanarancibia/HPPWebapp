@@ -20,6 +20,10 @@ export class EntrenamientoService {
     })
   }
 
+  getEntrenamiento(planificacion: string) {
+    return this.http.post<Entrenamiento>(`${env.apiUrl}/planificacion/entrenamiento-dia`, { idPlani: planificacion });
+  }
+
 
 
 }

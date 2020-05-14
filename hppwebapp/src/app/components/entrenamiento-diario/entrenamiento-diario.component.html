@@ -1,0 +1,34 @@
+<div class="container container-fluid">
+    <h1 class="nombre-prog">{{entrenamiento.nombre}} || {{entrenamiento.entrenXPlanis[0].fecha}}</h1>
+
+    <mat-accordion *ngFor="let seccion of entrenamiento.entrenXPlanis[0].secciones">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{seccion.tipoSeccion}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p style="white-space: pre-wrap;">{{seccion.comentarios}}</p>
+            <mat-expansion-panel *ngFor="let wod of seccion.wods; let wodIndex = index">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Wod {{wodIndex + 1}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        Descripcion del Wod
+                    </mat-expansion-panel-header>
+                    <p>El tipo de score de este wod es: {{wod.tipoScore}}</p><br>
+                    <p style="white-space: pre-wrap;">{{wod.descripcion }}</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        Comentarios del Wod
+                    </mat-expansion-panel-header>
+                    <p style="white-space: pre-wrap;">{{wod.comentarios}}</p>
+                </mat-expansion-panel>
+            </mat-expansion-panel>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
