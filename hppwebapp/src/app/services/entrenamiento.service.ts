@@ -14,14 +14,22 @@ export class EntrenamientoService {
 
   cargarEntrenamiento(entrenamiento: Entrenamiento) {
     this.http.post<any>(`${env.apiUrl}/entrenamiento`, entrenamiento, {
-      headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjoidGVzdCIsInJvbCI6IkVudHJlbmFkb3IiLCJpYXQiOjE1ODg4NjI4ODl9.ZEVSuKXNMabYhaCdsZqqK606xvoRn6rkt_SPflYEkps" }
+      headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
     }).toPromise().then(res => {
       console.log(res);
     })
   }
 
-  getEntrenamiento(planificacion: string) {
-    return this.http.post<Entrenamiento>(`${env.apiUrl}/planificacion/entrenamiento-dia`, { idPlani: planificacion });
+  getEntrenamiento(planificacion: string = "1", fecha: string = null) {
+    return this.http.post<Entrenamiento>(`${env.apiUrl}/planificacion/entrenamiento`, { idPlani: planificacion, fecha: "2020-5-14" }, {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem('token')
+      }
+    });
+  }
+
+  visibilidadEntrenamiento(idPlani: string, fecha: string, visible: number) {
+    return this.http.patch<Entrenamiento>(`${env.apiUrl}/entrenamiento`, { idPlani: idPlani, fecha: fecha, visible: visible });
   }
 
 

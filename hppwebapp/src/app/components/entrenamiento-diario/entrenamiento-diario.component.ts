@@ -17,19 +17,7 @@ export class EntrenamientoDiarioComponent implements OnInit {
   ngOnInit(): void {
     this.entrenamientoServ.getEntrenamiento("1").subscribe({
       next: entr => {
-        this.entrenamiento = entr; this.entrenamiento.entrenXPlanis[0].comentarios.replace(/\n/g, "<br />");
-        console.log(this.entrenamiento);
-        this.entrenamiento.entrenXPlanis[0].secciones.forEach(seccion => {
-
-          seccion.comentarios.replace(/\n/g, "<br />");
-          seccion.wods.forEach(wod => {
-
-            wod.descripcion.replace('\n', '<br>')
-            wod.comentarios.replace('\n', '<br>')
-            console.log(wod.descripcion);
-          });
-        });
-        console.log(this.entrenamiento);
+        this.entrenamiento = entr;
       },
       error: err => { console.log(err); }
     })

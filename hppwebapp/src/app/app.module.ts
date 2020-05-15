@@ -10,6 +10,7 @@ import { CargaEntrenamientoComponent } from "./components/carga-entrenamiento/ca
 import { EntrenamientoDiarioComponent } from './components/entrenamiento-diario/entrenamiento-diario.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ConsultaEntrenamientoComponent } from './components/consulta-entrenamiento/consulta-entrenamiento.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MenuComponent,
     CargaEntrenamientoComponent,
     EntrenamientoDiarioComponent,
+    ConsultaEntrenamientoComponent,
   ],
   imports: [
     BrowserModule,

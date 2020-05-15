@@ -40,7 +40,7 @@ export class CargaEntrenamientoComponent implements OnInit {
   cargarPlanifiaciones() {
     this.servicioPlani.getPlanificaciones().subscribe(
       {
-        next: planificacion => { this.planis = planificacion; },
+        next: planificacion => { this.planis = planificacion; console.log(this.planis) },
         error: err => console.log(err)
       }
     )

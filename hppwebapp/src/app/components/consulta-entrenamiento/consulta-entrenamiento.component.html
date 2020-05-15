@@ -1,0 +1,93 @@
+<div class="container container-fluid">
+
+    <h1>Consulta entrenamientos</h1>
+
+    <form [formGroup]="fg">
+        <div class="form-group row">
+            <label for="date" class="col-4 col-form-label label-form">Fecha entrenamiento</label>
+            <div class="col-8">
+                <input type="date" name="date" id="date" formControlName="fecha">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="select" class="col-4 col-form-label label-form">Planificacion</label>
+            <div class="col-8">
+                <select id="selectPlanis" name="select" aria-describedby="selectHelpBlock" class="custom-select"
+                    formControlName="idPlani">
+                    <option value='""'></option>
+                    <option value="{{planificacion.idPlanificacion}}" *ngFor="let planificacion of planificaciones">
+                        {{planificacion.nombre}}
+                    </option>
+                </select>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-12">
+                <button name="submit" type="submit" class="btn btn-primary " (click)="consultarEntrenamiento()">Buscar
+                </button>
+            </div>
+        </div>
+
+    </form>
+
+    <h2 class="nombre-prog">{{entrenamiento.nombre}} || {{entrenamiento.entrenXPlanis[0].fecha | date: 'dd/MM/yyyy'}}
+    </h2>
+    <div *ngIf="entrenamiento.length>0 || entrenamiento.length == undefined">
+        <mat-accordion *ngFor=" let seccion of entrenamiento.entrenXPlanis[0].secciones">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{seccion.tipoSeccion}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p style="white-space: pre-wrap;">{{seccion.comentarios}}</p>
+                <mat-expansion-panel *ngFor="let wod of seccion.wods; let wodIndex = index">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Wod {{wodIndex + 1}}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Descripcion del Wod
+                        </mat-expansion-panel-header>
+                        <p>Score: {{wod.tipoScore}}</p>
+                        <p style="white-space: pre-wrap;">{{wod.descripcion }}</p>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Comentarios del Wod
+                        </mat-expansion-panel-header>
+                        <p style="white-space: pre-wrap;">{{wod.comentarios}}</p>
+                    </mat-expansion-panel>
+                </mat-expansion-panel>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <br><br>
+    <div *ngIf="rol == 'Entrenador'">
+        <div *ngIf="entrenamiento.entrenXPlanis[0].visible == 1">
+            <div class="form-group row">
+                <h3>La planificacion esta visible</h3>
+                <div class="col-auto">
+                    <button name=" submit" type="submit" class="btn btn-primary " (click)="hacerInvisible()">Hacer
+                        invisible
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="entrenamiento.entrenXPlanis[0].visible == 0">
+            <div class="form-group row">
+                <h3>La planificacion no esta visible</h3>
+                <div class="col-auto">
+                    <button name=" submit" type="submit" class="btn btn-primary " (click)="hacerVisible()">Hacer
+                        visible
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

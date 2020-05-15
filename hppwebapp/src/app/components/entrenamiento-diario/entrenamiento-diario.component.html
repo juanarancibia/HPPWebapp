@@ -1,5 +1,6 @@
 <div class="container container-fluid">
-    <h1 class="nombre-prog">{{entrenamiento.nombre}} || {{entrenamiento.entrenXPlanis[0].fecha}}</h1>
+    <h1 class="nombre-prog">{{entrenamiento.nombre}} || {{entrenamiento.entrenXPlanis[0].fecha | date: 'dd/MM/yyyy'}}
+    </h1>
 
     <mat-accordion *ngFor="let seccion of entrenamiento.entrenXPlanis[0].secciones">
         <mat-expansion-panel>
@@ -19,7 +20,7 @@
                     <mat-expansion-panel-header>
                         Descripcion del Wod
                     </mat-expansion-panel-header>
-                    <p>El tipo de score de este wod es: {{wod.tipoScore}}</p><br>
+                    <p>Score: {{wod.tipoScore}}</p>
                     <p style="white-space: pre-wrap;">{{wod.descripcion }}</p>
                 </mat-expansion-panel>
                 <mat-expansion-panel>

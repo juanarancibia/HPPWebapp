@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
     this.loginService.logInUsuario(this.user).subscribe(
       {
-        next: tok => { localStorage.setItem('token', tok.token); },
+        next: tok => { localStorage.setItem('token', tok.token); localStorage.setItem('rol', tok.rol); },
         error: err => console.log(err)
       }
     );
