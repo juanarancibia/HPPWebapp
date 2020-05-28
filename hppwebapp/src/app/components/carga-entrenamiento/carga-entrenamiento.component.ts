@@ -105,7 +105,7 @@ export class CargaEntrenamientoComponent implements OnInit {
 
       wods = [];
       seccion.wods.forEach(wod => {
-        wods.push(new Wod(wod.descripcion, wod.tipoScore, wod.comentariosW, wod.idTimer))
+        wods.push(new Wod(wod.descripcion, wod.tipoScore, wod.comentariosW, wod.idTimer, ""))
       });
       console.log(secs)
       secs.push(new Seccion(
@@ -116,6 +116,9 @@ export class CargaEntrenamientoComponent implements OnInit {
     });
     this.entrenamiento = new Entrenamiento(this.addMore.value.planificacion, this.addMore.value.fecha, this.addMore.value.comentariosP, this.addMore.value.visible, secs);
     console.log(JSON.stringify(this.entrenamiento));
-    this.servicioEnt.cargarEntrenamiento(this.entrenamiento);
+    this.servicioEnt.cargarEntrenamiento(this.entrenamiento).subscribe({
+      next: resultado => { console.log(resultado); resultado.name == "SequelizeUniqueConstraintError" ? window.alert("Ya existe un entrenamiento en esta planificacion para este día") : window.alert("Se cargo el entrenamiento con éxito") },
+      error: err => window.alert("Hubo un error al cargar el entrenamiento " + err)
+    });
   }
 }

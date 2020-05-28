@@ -1,6 +1,46 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Carga de score</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <form [formGroup]="form">
+            <div class="form-group row justify-content-center">
+                <p class="h5 col-auto">El tipo de score es {{tipoScoreCarga}}</p>
+            </div>
+            <div class="form-group row justify-content-center">
+                <div class="col-auto ">
+                    <label for="score" class="col-4 col-form-label label-form">Score</label>
+                    <input class="col-8 rounded" type="text" name="score" id="score" placeholder="Ingrese su score"
+                        formControlName="scoreCargado">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cancelo')">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="guardar(modal)">Guardar</button>
+    </div>
+</ng-template>
+
+
+
+
 <div class="container container-fluid">
-    <h1 class="nombre-prog">{{entrenamiento.nombre}} || {{entrenamiento.entrenXPlanis[0].fecha | date: 'dd/MM/yyyy'}}
-    </h1>
+    <div *ngIf="entrenamiento.entrenXPlanis[0].length > 0">
+        <h1 class="nombre-prog text-center" style="color: #ffffff;">{{entrenamiento.nombre}} -
+            {{entrenamiento.entrenXPlanis[0].fecha | date: 'dd/MM/yyyy'}}
+        </h1>
+    </div>
+    <div *ngIf="entrenamiento.entrenXPlanis[0].length == 0">
+        <h1 class="nombre-prog text-center" style="color: #ffffff;">No hay entrenamiento para este dia
+        </h1>
+        <h1 class="nombre-prog h4 text-center mt-4" style="color: #cac9c9;">Aprovecha y descansa
+        </h1>
+    </div>
 
     <mat-accordion *ngFor="let seccion of entrenamiento.entrenXPlanis[0].secciones">
         <mat-expansion-panel>
@@ -10,26 +50,34 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <p style="white-space: pre-wrap;">{{seccion.comentarios}}</p>
-            <mat-expansion-panel *ngFor="let wod of seccion.wods; let wodIndex = index">
+            <mat-expansion-panel *ngFor="let wod of seccion.wods; let wodIndex = index"
+                style="margin-left: -15px; margin-right: -15px;">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Wod {{wodIndex + 1}}
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <mat-expansion-panel>
+                <mat-expansion-panel style="margin-left: -15px; margin-right: -15px;">
                     <mat-expansion-panel-header>
                         Descripcion del Wod
                     </mat-expansion-panel-header>
                     <p>Score: {{wod.tipoScore}}</p>
                     <p style="white-space: pre-wrap;">{{wod.descripcion }}</p>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel style="margin-left: -15px; margin-right: -15px;">
                     <mat-expansion-panel-header>
                         Comentarios del Wod
                     </mat-expansion-panel-header>
                     <p style="white-space: pre-wrap;">{{wod.comentarios}}</p>
                 </mat-expansion-panel>
+                <div class="row justify-content-end" *ngIf="wod.tipoScore != 'Ninguno' ">
+                    <button class="btn btn-outline-primary mt-2 mr-1 "
+                        (click)="open(content, wod.tipoScore, wod.idWod, seccion.idSeccion);">Cargar
+                        score</button>
+                </div>
+
             </mat-expansion-panel>
+
         </mat-expansion-panel>
     </mat-accordion>
 </div>

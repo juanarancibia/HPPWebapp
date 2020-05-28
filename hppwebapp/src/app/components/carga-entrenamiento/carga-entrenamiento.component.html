@@ -1,9 +1,4 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<div class="container-fluid container">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container bg-light py-2 rounded">
 
   <form [formGroup]="addMore">
     <p class="titulo-form">Carga de entrenamiento</p>
@@ -75,6 +70,7 @@
                 <option value="Cardio">Cardio</option>
                 <option value="Oly">Oly</option>
                 <option value="Rest">Rest</option>
+                <option value="Core">Core</option>
               </select>
             </div>
           </div>
@@ -88,36 +84,30 @@
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8 ">
-              <button name="submit" type="submit" class="btn btn-primary float-right"
+              <button name="submit" type="submit" class="btn btn-danger float-right"
                 (click)="borrarSeccion(secIndex)">Borrar seccion</button>
             </div>
           </div>
 
 
           <div class="contenedor-seccion" formArrayName="wods">
-            <div *ngFor="let wod of wods(secIndex).controls; let wodIndex = index" class="container">
+            <div *ngFor="let wod of wods(secIndex).controls; let wodIndex = index">
               <div [formGroupName]="wodIndex">
 
                 <h1 class="titulo-wod">Sec {{secIndex+1}} - Wod {{ wodIndex + 1 }}</h1> <br>
 
-                <div class="form-group row">
-                  <label for="timers" class="col-4 col-form-label label-form">Timer</label>
-                  <div class="col-8">
-                    <select id="timers" name="timers" aria-describedby="timersHelpBlock" class="custom-select"
-                      formControlName="idTimer"></select>
-                    <span id="timersHelpBlock" class="form-text text-muted">Seleccione el timer</span>
-                  </div>
-                </div>
+
                 <div class="form-group row">
                   <label for="tipoScore" class="col-4 col-form-label label-form">Tipo de score</label>
                   <div class="col-8">
                     <select id="tipoScore" name="tipoScore" aria-describedby="tipoScoreHelpBlock" class="custom-select"
                       formControlName="tipoScore">
-                      <option value=""></option>
+                      <option value="Ninguno"></option>
                       <option value="Reps">Reps</option>
                       <option value="Peso">Peso</option>
                       <option value="Tiempo">Tiempo</option>
-                      <option value="Otro">Otro</option>
+                      <option value="Otro">Otro (Ver comentarios)</option>
+                      <option value="Ninguno">Ninguno</option>
                     </select>
                     <span id="tipoScoreHelpBlock" class="form-text text-muted">Seleccione el tipo de score para el
                       wod</span>
@@ -139,9 +129,9 @@
                     <span id="comentariosWHelpBlock" class="form-text text-muted">Comentarios referidos al wod</span>
                   </div>
                 </div>
-                <div class="form-group row justify-content-end">
+                <div class="form-group row justify-content-end ">
                   <div class="col-auto">
-                    <button name=" submit" type="submit" class="btn btn-primary "
+                    <button name=" submit" type="submit" class="btn btn-danger "
                       (click)="borrarWod(secIndex, wodIndex)">Borrar
                       wod</button>
                   </div>
@@ -151,7 +141,7 @@
             </div>
             <div class="form-group row justify-content-end">
               <div class="col-auto">
-                <button name=" submit" type="submit" class="btn btn-primary " (click)="agregarWod(secIndex)">Agregar
+                <button name=" submit" type="submit" class="btn btn-primary  " (click)="agregarWod(secIndex)">Agregar
                   wod</button>
               </div>
             </div>
@@ -171,7 +161,7 @@
 
   <div class="form-group row justify-content-end" *ngIf="addMore.valid">
     <div class="col-auto">
-      <button name=" submit" type="submit" class="btn btn-primary " (click)="cargarEntrenamiento()">Cargar entrenamiento
+      <button name=" submit" type="submit" class="btn btn-success " (click)="cargarEntrenamiento()">Cargar entrenamiento
       </button>
     </div>
   </div>

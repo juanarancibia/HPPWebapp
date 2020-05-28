@@ -1,0 +1,8 @@
+.titulo{
+    color:whitesmoke;
+    font-weight: bold;
+}
+
+.bg-image{
+    background-image: url(../../../assets/bg-hpp.jpg);
+}

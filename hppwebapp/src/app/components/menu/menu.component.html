@@ -1,11 +1,59 @@
-<header class="header">
+<!-- <nav class="header">
   <a href="" class="logo">HPP APP</a>
   <input class="menu-btn" type="checkbox" id="menu-btn" />
   <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
   <ul class="menu">
-    <li><a href="#work">Home</a></li>
-    <li><a href="#about">Entrenamiento diario</a></li>
-    <li><a href="#careers">Cargar entrenamiento</a></li>
-    <li><a href="#contact">Ver entrenamiento</a></li>
+    <li><a [routerLink]="['']" routerLinkActive="router-link-active">Home</a></li>
+    <li><a [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a></li>
+    <li><a [routerLink]="['/entrenamiento-diario']" routerLinkActive="router-link-active">Entrenamiento diario</a>
+    </li>
+    <li><a [routerLink]="['/carga-entrenamiento']" routerLinkActive="router-link-active">Cargar entrenamiento</a></li>
+    <li><a [routerLink]="['/consultar-entrenamiento']" routerLinkActive="router-link-active">Consultar
+        entrenamiento</a>
+    </li>
   </ul>
-</header>
+
+</nav>
+ -->
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#">HPP Programming</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/login']">Login <span class="sr-only">Login</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/signup']">SignUp <span class="sr-only">SignUp</span></a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Entrenamiento
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/consultar-entrenamiento']">Consulta entrenamiento</a>
+          <a class="dropdown-item" [routerLink]="['/carga-entrenamiento']">Carga entrenamiento</a>
+          <a class="dropdown-item" href="#" tabindex="-1" [routerLink]="['/entrenamiento-diario']"
+            routerLinkActive="router-link-active">Entrenamiento del dia</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" tabindex="-1" [routerLink]="['/consulta-scores']"
+          routerLinkActive="router-link-active">Consulta scores</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+
+
+
+<router-outlet></router-outlet>

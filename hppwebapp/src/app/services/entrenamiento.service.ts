@@ -13,15 +13,13 @@ export class EntrenamientoService {
   constructor(private http: HttpClient) { }
 
   cargarEntrenamiento(entrenamiento: Entrenamiento) {
-    this.http.post<any>(`${env.apiUrl}/entrenamiento`, entrenamiento, {
+    return this.http.post<any>(`${env.apiUrl}/entrenamiento`, entrenamiento, {
       headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
-    }).toPromise().then(res => {
-      console.log(res);
-    })
+    });
   }
 
   getEntrenamiento(planificacion: string = "1", fecha: string = null) {
-    return this.http.post<Entrenamiento>(`${env.apiUrl}/planificacion/entrenamiento`, { idPlani: planificacion, fecha: "2020-5-14" }, {
+    return this.http.post<Entrenamiento>(`${env.apiUrl}/planificacion/entrenamiento`, { idPlani: planificacion, fecha: fecha }, {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem('token')
       }
