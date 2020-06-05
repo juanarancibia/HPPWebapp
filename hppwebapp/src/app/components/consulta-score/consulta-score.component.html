@@ -15,9 +15,11 @@
 </ng-template>
 
 
-<div class="container bg-light py-2 rounded">
+<p class="container h4 mx-auto mb-0 text-white bg-titulo rounded-top">SCORES
+</p>
 
-    <p class="h1 text-center mb-4"> Consulta scores</p>
+<div class="container bg-light py-3 rounded-bottom mt-0 shadow">
+
 
     <form [formGroup]="form">
         <div class="form-group row">
@@ -83,15 +85,17 @@
             <caption>Ranking de scores</caption>
             <thead>
                 <tr>
+                    <th scope="col">#</th>
                     <th scope="col" (click)="ordenarAtletas()">Atleta</th>
                     <th scope="col" (click)="ordenarTipo()">Tipo</th>
                     <th scope="col" (click)="ordenarScores()">Score</th>
                     <th scope="col">Wod</th>
                 </tr>
             </thead>
-            <tbody *ngFor="let score of scores">
+            <tbody *ngFor="let score of scores; let i = index">
                 <tr>
-                    <th scope="row">{{score.usuario.nombre + " " + score.usuario.apellido}}</th>
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{score.usuario.nombre + " " + score.usuario.apellido}}</td>
                     <td>{{score.wod.tipoScore}}</td>
                     <td>{{score.score}}</td>
                     <td><button class="btn btn-outline-primary"

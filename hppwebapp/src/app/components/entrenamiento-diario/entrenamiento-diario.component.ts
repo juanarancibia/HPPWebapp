@@ -29,10 +29,10 @@ export class EntrenamientoDiarioComponent implements OnInit {
       scoreCargado: [""]
     });
 
-    this.entrenamientoServ.getEntrenamiento("1").subscribe({
+    this.entrenamientoServ.getEntrenamiento(localStorage.getItem('idPlani')).subscribe({
       next: entr => {
         this.entrenamiento = entr;
-        console.log(this.entrenamiento);
+
       },
       error: err => { console.log(err); }
     });
@@ -41,8 +41,8 @@ export class EntrenamientoDiarioComponent implements OnInit {
   open(content, tipoScore, idWod, idSecicon) {
     this.idWod = idWod;
     this.idSeccion = idSecicon;
-    console.log(this.idWod + "    " + this.idSeccion);
     this.tipoScoreCarga = tipoScore;
+    this.tipoScoreCarga == "Tiempo" ? this.form.setValue({ scoreCargado: "00:00:00" }) : this.form.setValue({ scoreCargado: "0" });
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -51,12 +51,16 @@ export class EntrenamientoDiarioComponent implements OnInit {
   }
 
   guardar(modal) {
-    modal.close('Guardo');
-    this.scoreService.cargarScore(this.idSeccion, this.idWod, this.form.value.scoreCargado, this.entrenamiento.entrenXPlanis[0].fecha).subscribe({
-      next: res => console.log(res),
-      error: err => console.error(err),
-    });
+    if (this.form.value.scoreCargado == "") {
 
+      window.alert("Ingrese un score");
+    } else {
+      modal.close('Guardo');
+      this.scoreService.cargarScore(this.idSeccion, this.idWod, this.form.value.scoreCargado, this.entrenamiento.entrenXPlanis[0].fecha).subscribe({
+        next: res => console.log(res),
+        error: err => console.error(err),
+      });
+    }
   }
 
   private getDismissReason(reason: any): string {

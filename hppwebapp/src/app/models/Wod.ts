@@ -5,7 +5,7 @@ export class Wod {
     comentarios: string;
     idTimer: string;
 
-    constructor(desc: string, tipo: string, coment: string, timer: string, wod: string) {
+    constructor(desc: string, tipo: string, coment: string, timer: string, wod: string, idWod = "") {
         this.idWod = wod;
         this.descripcion = desc;
         this.tipoScore = tipo;

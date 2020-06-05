@@ -1,0 +1,24 @@
+.avatar{
+   color:white;
+   margin: 0 auto;
+   height: 2em;
+   width: 2em;
+   font-size: 3em;
+   border: 1px solid #ffffff;
+   border-radius: 50%;
+   background-color:#218838 ;
+   text-align: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.avatar i{
+    transform: rotate(10deg);
+}
+
+.btn{
+    background-color: #218838;
+    font-size: 20px;
+}
+

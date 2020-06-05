@@ -1,0 +1,52 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Descripcion Wod</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p style="white-space: pre-wrap;" class="ml-3">{{wod.descripcion}}</p>
+    </div>
+    <div class="modal-footer">
+        <button id="btnCerrar" type="button" class="btn btn-danger" (click)="modal.dismiss('Cerro')">Cerrar</button>
+    </div>
+</ng-template>
+
+<p class="h4 container mx-auto mb-0 text-white bg-titulo rounded-top">MIS SCORES
+</p>
+
+<div class="container bg-light rounded-bottom mt-0 py-3 shadow">
+
+    <div class="form-group row">
+        <label for="date" class="col-4 col-form-label label-form">Fecha</label>
+        <input type="date" name="date" id="date" class="form-control col-7 text-center"
+            (change)="filtrarFecha($event.target.value)">
+    </div>
+    <div class="row mb-2">
+        <div class="col-auto">
+            <button class="btn btn-warning" (click)="reset()">Reset</button>
+        </div>
+    </div>
+
+    <table class=" table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Score</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Wod</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let score of dataSource; let i = index">
+            <tr>
+                <th scope="row">{{i+1}}</th>
+                <td>{{score.score}}</td>
+                <td>{{score.fecha | date: 'dd/MM/yyyy'}}</td>
+                <td><button class="btn btn-outline-primary"
+                        (click)="verWod(content, score.fecha, score.idPlani, score.idSeccion, score.idWod);">Ver</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

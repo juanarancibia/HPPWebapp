@@ -8,10 +8,10 @@ import { Score } from '../models/Score';
 })
 export class ScoreService {
 
-  constructor(private htpp: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   cargarScore(idSeccion: string, idWod: string, score: string, fecha: string) {
-    return this.htpp.post<any>(`${env.apiUrl}/score`, { idWod: idWod, idSeccion: idSeccion, score: score, fecha: fecha }, {
+    return this.http.post<any>(`${env.apiUrl}/score`, { idWod: idWod, idSeccion: idSeccion, score: score, fecha: fecha }, {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem('token')
       }
@@ -19,10 +19,18 @@ export class ScoreService {
   }
 
   consultarScoresEntrenamiento(fecha: string, idPlani: string = "1") {
-    return this.htpp.post<any>(`${env.apiUrl}/score-entrenamiento`, { fecha: fecha, idPlani: idPlani }, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } });
+    return this.http.post<any>(`${env.apiUrl}/score-entrenamiento`, { fecha: fecha, idPlani: idPlani }, { headers: { "Authorization": "Bearer " + localStorage.getItem('token') } });
   }
 
   getScoreWod(fecha: string, idPlani: string, idSeccion: string, idWod: string) {
-    return this.htpp.post<any>(`${env.apiUrl}/score-wod`, { idWod: idWod, idSeccion: idSeccion, fecha: fecha, idPlani: idPlani })
+    return this.http.post<any>(`${env.apiUrl}/score-wod`, { idWod: idWod, idSeccion: idSeccion, fecha: fecha, idPlani: idPlani })
+  }
+
+  getScoreAtleta() {
+    return this.http.get<any>(`${env.apiUrl}/score-atleta`, {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem('token')
+      }
+    });
   }
 }

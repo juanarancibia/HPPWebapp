@@ -1,0 +1,195 @@
+<p class="h4 col-11 col-sm-10 col-md-9 col-lg-7 mx-auto mb-0 text-white bg-titulo rounded-top">MODIFICAR ENTRENAMIENTO
+</p>
+
+<div class="container col-11 col-sm-10 col-md-9 col-lg-7 bg-light py-3 mb-4 rounded-bottom mt-0 shadow">
+
+    <form [formGroup]="addMore">
+        <div>
+            <div class="form-group row">
+                <label for="date" class="col-4 col-form-label label-form">Fecha entrenamiento</label>
+                <div class="col-8">
+                    <input type="date" name="date" id="date" formControlName="fecha">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="select" class="col-4 col-form-label label-form">Planificacion</label>
+                <div class="col-8">
+                    <select id="selectPlanis" name="select" aria-describedby="selectHelpBlock" class="custom-select"
+                        formControlName="planificacion">
+                        <option value="null"></option>
+                        <option value="{{plani.idPlanificacion}}" *ngFor="let plani of planis">{{plani.nombre}}</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <div class="offset-4 col-8 ">
+                    <button name="submit" type="submit" class="btn btn-primary float-right"
+                        (click)="getEntrenamiento()">Modificar</button>
+                </div>
+            </div>
+
+
+            <hr>
+
+            <div class="form-group row">
+                <label class="col-4 label-form">Hacer visible?</label>
+                <div class="col-8">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input name="visible" id="visible_0" type="radio" class="custom-control-input" value="1"
+                            aria-describedby="visibleHelpBlock" formControlName="visible">
+                        <label for="visible_0" class="custom-control-label">Si</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input name="visible" id="visible_1" type="radio" class="custom-control-input" value="0"
+                            aria-describedby="visibleHelpBlock" formControlName="visible">
+                        <label for="visible_1" class="custom-control-label">No</label>
+                    </div>
+                    <span id="visibleHelpBlock" class="form-text text-muted">Hacer visible entrenamiento a los
+                        atletas</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="comentariosE" class="col-4 col-form-label label-form">Comentarios entrenamiento</label>
+                <div class="col-8">
+                    <textarea id="comentariosE" name="comentariosE" cols="40" rows="1"
+                        aria-describedby="comentariosEHelpBlock" class="form-control"
+                        formControlName="comentariosP"></textarea>
+                    <span id="comentariosEHelpBlock" class="form-text text-muted">Comentarios referidos al entrenamiento
+                        del
+                        dia</span>
+                </div>
+            </div>
+        </div>
+
+        <div formArrayName="secciones">
+            <div *ngFor="let seccion of secciones().controls; let secIndex = index" class="contenedor-seccion">
+
+                <div [formGroupName]="secIndex">
+
+                    <h1 class="titulo-seccion">Seccion {{ secIndex + 1 }}</h1> <br>
+
+                    <div class="form-group row">
+                        <label for="tipoSeccion" class="col-4 col-form-label label-form">Tipo seccion</label>
+                        <div class="col-8">
+                            <select id="tipoSeccion" name="tipoSeccion" class="custom-select" formControlName="tipo">
+                                <option value="Otro"></option>
+                                <option value="Fuerza">Fuerza</option>
+                                <option value="Activacion">Activacion</option>
+                                <option value="Estiramiento">Estiramiento</option>
+                                <option value="Wods">Wods</option>
+                                <option value="Estructura">Estructura</option>
+                                <option value="Zona Media">Zona media</option>
+                                <option value="Calentamiento">Calentamiento</option>
+                                <option value="Test">Test</option>
+                                <option value="Extra">Extra</option>
+                                <option value="Cardio">Cardio</option>
+                                <option value="Oly">Oly</option>
+                                <option value="Rest">Rest</option>
+                                <option value="Core">Core</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="comentarioS" class="col-4 col-form-label label-form">Comentarios seccion</label>
+                        <div class="col-8">
+                            <textarea id="comentarioS" name="comentarioS" cols="40" rows="1"
+                                aria-describedby="comentarioSHelpBlock" class="form-control"
+                                formControlName="comentariosS"></textarea>
+                            <span id="comentarioSHelpBlock" class="form-text text-muted">Comentarios referidos a la
+                                seccion</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-4 col-8 ">
+                            <button name="submit" type="submit" class="btn btn-danger float-right"
+                                (click)="borrarSeccion(secIndex)">Borrar seccion</button>
+                        </div>
+                    </div>
+
+
+                    <div class="contenedor-seccion" formArrayName="wods">
+                        <div *ngFor="let wod of wods(secIndex).controls; let wodIndex = index">
+                            <div [formGroupName]="wodIndex">
+
+                                <h1 class="titulo-wod">Sec {{secIndex+1}} - Wod {{ wodIndex + 1 }}</h1> <br>
+
+
+                                <div class="form-group row">
+                                    <label for="tipoScore" class="col-4 col-form-label label-form">Tipo de score</label>
+                                    <div class="col-8">
+                                        <select id="tipoScore" name="tipoScore" aria-describedby="tipoScoreHelpBlock"
+                                            class="custom-select" formControlName="tipoScore">
+                                            <option value="Ninguno"></option>
+                                            <option value="Reps">Reps</option>
+                                            <option value="Peso">Peso</option>
+                                            <option value="Tiempo">Tiempo</option>
+                                            <option value="Otro">Otro (Ver comentarios)</option>
+                                            <option value="Ninguno">Ninguno</option>
+                                        </select>
+                                        <span id="tipoScoreHelpBlock" class="form-text text-muted">Seleccione el tipo de
+                                            score para el
+                                            wod</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="descWod" class="col-4 col-form-label label-form">Descripcion wod</label>
+                                    <div class="col-8">
+                                        <textarea id="descWod" name="descWod" cols="40" rows="4" class="form-control"
+                                            formControlName="descripcion"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="comentariosW" class="col-4 col-form-label label-form">Comentarios
+                                        wod</label>
+                                    <div class="col-8">
+                                        <textarea id="comentariosW" name="comentariosW" cols="40" rows="1"
+                                            aria-describedby="comentariosWHelpBlock" class="form-control"
+                                            formControlName="comentariosW"></textarea>
+                                        <span id="comentariosWHelpBlock" class="form-text text-muted">Comentarios
+                                            referidos al wod</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row justify-content-end ">
+                                    <div class="col-auto">
+                                        <button name=" submit" type="submit" class="btn btn-danger "
+                                            (click)="borrarWod(secIndex, wodIndex)">Borrar
+                                            wod</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-end">
+                            <div class="col-auto">
+                                <button name=" submit" type="submit" class="btn btn-primary  "
+                                    (click)="agregarWod(secIndex)">Agregar
+                                    wod</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <hr>
+
+    <div class="form-group row justify-content-end">
+        <div class="col-auto">
+            <button name=" submit" type="submit" class="btn btn-primary " (click)="agregarSeccion()">Agregar seccion
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div class="form-group row justify-content-end" *ngIf="addMore.valid">
+        <div class="col-auto">
+            <button name=" submit" type="submit" class="btn btn-success " (click)="modificarEntrenamiento()">Actualizar
+                entrenamiento
+            </button>
+        </div>
+    </div>
+</div>

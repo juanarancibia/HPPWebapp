@@ -14,13 +14,20 @@
             <div class="form-group row justify-content-center">
                 <div class="col-auto ">
                     <label for="score" class="col-4 col-form-label label-form">Score</label>
-                    <input class="col-8 rounded" type="text" name="score" id="score" placeholder="Ingrese su score"
-                        formControlName="scoreCargado">
+                    <input class="col-5 rounded" type="number" name="score" id="score" placeholder="Ingrese su score"
+                        formControlName="scoreCargado" *ngIf="tipoScoreCarga!='Tiempo'">
+                    <input class="col-8 rounded mb-0" type="time" step='1' min="00:00:00" max="20:00:00" name="score"
+                        id="score" placeholder="Ingrese su score" formControlName="scoreCargado"
+                        *ngIf="tipoScoreCarga=='Tiempo'">
+                    <span id="scoreHelpBlock" class="form-text text-muted offset-5"
+                        *ngIf="tipoScoreCarga=='Tiempo'">hh:mm:ss</span>
                 </div>
+
             </div>
+
         </form>
     </div>
-    <div class="modal-footer">
+    <div class=" modal-footer">
         <button type="button" class="btn btn-danger" (click)="modal.dismiss('Cancelo')">Cancelar</button>
         <button type="button" class="btn btn-primary" (click)="guardar(modal)">Guardar</button>
     </div>
@@ -29,7 +36,7 @@
 
 
 
-<div class="container container-fluid">
+<div class="container col-11 col-sm-10 col-md-9 col-lg-7">
     <div *ngIf="entrenamiento.entrenXPlanis[0].length > 0">
         <h1 class="nombre-prog text-center" style="color: #ffffff;">{{entrenamiento.nombre}} -
             {{entrenamiento.entrenXPlanis[0].fecha | date: 'dd/MM/yyyy'}}
@@ -71,7 +78,7 @@
                     <p style="white-space: pre-wrap;">{{wod.comentarios}}</p>
                 </mat-expansion-panel>
                 <div class="row justify-content-end" *ngIf="wod.tipoScore != 'Ninguno' ">
-                    <button class="btn btn-outline-primary mt-2 mr-1 "
+                    <button class="btn btn-outline-danger mt-2 mr-1 "
                         (click)="open(content, wod.tipoScore, wod.idWod, seccion.idSeccion);">Cargar
                         score</button>
                 </div>

@@ -18,7 +18,14 @@ export class EntrenamientoService {
     });
   }
 
-  getEntrenamiento(planificacion: string = "1", fecha: string = null) {
+  modificarEntrenamiento(entrenamiento: Entrenamiento) {
+    return this.http.put<any>(`${env.apiUrl}/entrenamiento`, entrenamiento, {
+      headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
+    });
+  }
+
+
+  getEntrenamiento(planificacion: string = "", fecha: string = null) {
     return this.http.post<Entrenamiento>(`${env.apiUrl}/planificacion/entrenamiento`, { idPlani: planificacion, fecha: fecha }, {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem('token')
@@ -30,6 +37,12 @@ export class EntrenamientoService {
     return this.http.patch<Entrenamiento>(`${env.apiUrl}/entrenamiento`, { idPlani: idPlani, fecha: fecha, visible: visible });
   }
 
-
+  deleteEntrenamiento(idPlani, fecha) {
+    return this.http.delete<any>(`${env.apiUrl}/entrenamiento?&idPlani=${idPlani}&fecha=${fecha}`, {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem('token')
+      }
+    });
+  }
 
 }

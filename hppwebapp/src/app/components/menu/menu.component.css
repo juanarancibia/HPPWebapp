@@ -1,4 +1,16 @@
-nav{
-  margin-bottom: 3%;
-  position: static;
+.bg-menu{
+  background-color: rgba(91, 19, 19, 0.89);
 }
+
+.bg-submenu{
+  background-color: rgba(0,0,0, 0);
+}
+
+
+@media (min-width: 768px) {
+  .bg-submenu{ 
+    background-color:rgba(91, 19, 19, 0.89);
+  } 
+}
+
+

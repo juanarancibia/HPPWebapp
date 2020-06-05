@@ -1,13 +1,12 @@
-<div
-    class="container col-10 col-sm-8 col-md-7 col-lg-4 mx-auto bg-transparent border border-secondary py-2 mb-4 rounded">
+<p class="h4 col-11 col-sm-9 col-md-7 col-lg-5 mx-auto mb-0 text-white bg-titulo rounded-top">ACTUALIZAR DATOS
+</p>
+
+<div class="container bg-light rounded-bottom mt-0 py-3 col-11 col-sm-9 col-md-7 col-lg-5">
     <form [formGroup]="fg">
-        <div class="avatar mt-2"><i class="fas fa-dumbbell"></i></div>
-        <p class="text-center h3 my-3 text-white">Crea tu cuenta</p>
-        <hr>
         <div class="form-group row">
 
             <div class="col-12">
-                <input type="text" placeholder="Nombre completo" name="nombre" id="nombre" formControlName="nombre"
+                <input type="text" placeholder="Nombre" name="nombre" id="nombre" formControlName="nombre"
                     class="form-control">
             </div>
         </div>
@@ -19,13 +18,19 @@
         </div>
         <div class="form-group row">
             <div class="col-12">
-                <input type="email" placeholder="Email" name="email" id="email" formControlName="email"
+                <input type="email" disabled placeholder="Email" name="email" id="email" formControlName="email"
                     class="form-control">
             </div>
         </div>
         <div class="form-group row">
             <div class="col-12">
-                <input type="password" placeholder="Contraseña" name="pwd" id="pwd" formControlName="pwd"
+                <input type="password" placeholder="Contraseña actual" name="pwd" id="pwd" formControlName="pwd"
+                    class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-12">
+                <input type="password" placeholder="Nueva contraseña" name="Npwd" id="Npwd" formControlName="Nuevapwd"
                     class="form-control">
             </div>
         </div>
@@ -48,5 +53,5 @@
         </div>
     </form>
     <hr>
-    <button class="btn btn-success col-12" (click)="signUp()"> Registrarse</button>
+    <button class="btn btn-success col-12" (click)="actualizar()"> Actualizar</button>
 </div>

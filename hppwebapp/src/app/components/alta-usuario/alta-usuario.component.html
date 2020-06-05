@@ -1,0 +1,43 @@
+<p class="container h4 mx-auto mb-0 text-white bg-titulo rounded-top">ALTA USUARIO
+</p>
+
+<div class="container bg-light py-3 rounded-bottom mt-0">
+    <form [formGroup]="fg">
+        <div *ngIf="usuarios.length>0">
+            <table class="table table-hover">
+                <caption>Alta usuario en planificacion</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Planificacion</th>
+                        <th scope="col">Confirmar</th>
+
+                    </tr>
+                </thead>
+                <tbody *ngFor="let usuario of usuarios; let i = index">
+                    <tr>
+                        <th scope="row">{{usuario.nombre + " " + usuario.apellido}}</th>
+                        <td>{{usuario.email}}</td>
+                        <td><select id="selectPlanis" name="select" aria-describedby="selectHelpBlock"
+                                class="custom-select" formControlName="idPlani">
+                                <option value='null' disabled selected>Seleccione una</option>
+                                <option value="{{planificacion.idPlanificacion}}"
+                                    *ngFor="let planificacion of planificaciones">
+                                    {{planificacion.nombre}}
+                                </option>
+                            </select></td>
+                        <td><button class="btn btn-outline-primary"
+                                (click)="updatePlani(usuario.email, i)">Confirmar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="usuarios.length==0">
+            <h1 class="text-center" style="color:  rgb(139, 29, 29);">Todos los atletas tienen planificación
+                asignada
+            </h1>
+        </div>
+    </form>
+</div>

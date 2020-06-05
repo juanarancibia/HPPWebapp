@@ -38,9 +38,19 @@ export class LoginComponent implements OnInit {
       pwd: this.loginForm.value.pwd,
     };
 
+    localStorage.removeItem('token');
+    localStorage.removeItem('rol');
+
     this.loginService.logInUsuario(this.user).subscribe(
       {
-        next: tok => { localStorage.setItem('token', tok.token); localStorage.setItem('rol', tok.rol); this.router.navigateByUrl('entrenamiento-diario'); },
+        next: tok => {
+          if (tok.token) {
+            localStorage.setItem('token', tok.token); localStorage.setItem('rol', tok.rol); this.router.navigateByUrl('entrenamiento-diario');
+            localStorage.setItem('idPlani', tok.idPlani);
+          } else {
+            window.alert(tok);
+          }
+        },
         error: err => console.log(err)
       }
     );

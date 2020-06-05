@@ -35,7 +35,7 @@ export class ConsultaEntrenamientoComponent implements OnInit {
     this.scoreOrd = false;
     this.atletaOrd = false;
     this.scores = [];
-    this.entrenamiento = { entrenXPlanis: [[]] };
+    this.entrenamiento = { entrenXPlanis: [[]], nombre: '' };
     this.fg = this.fb.group({
       fecha: [""],
       idPlani: [""],
@@ -60,6 +60,7 @@ export class ConsultaEntrenamientoComponent implements OnInit {
     this.entrenamientoServ.getEntrenamiento(this.fg.value.idPlani, this.fg.value.fecha).subscribe({
       next: entr => {
         this.entrenamiento = entr;
+        console.log(this.entrenamiento);
       },
       error: err => { console.log(err); }
     })
@@ -110,14 +111,14 @@ export class ConsultaEntrenamientoComponent implements OnInit {
     if (this.scoreOrd) {
       this.dataSource.sort(function (a, b) {
         if (tipo == "Tiempo") {
-          return parseInt((a.score.split(':')[0]) + a.score.split(':')[1]) > parseInt((b.score.split(':')[0]) + b.score.split(':')[1])
+          return parseInt((a.score.split(':')[0]) + a.score.split(':')[1] + a.score.split(':')[2]) > parseInt((b.score.split(':')[0]) + b.score.split(':')[1] + b.score.split(':')[2])
         }
         return parseInt(a.score) > parseInt(b.score);
       });
     } else {
       this.dataSource.sort(function (a, b) {
         if (tipo == "Tiempo") {
-          return parseInt((a.score.split(':')[0]) + a.score.split(':')[1]) < parseInt((b.score.split(':')[0]) + b.score.split(':')[1])
+          return parseInt((a.score.split(':')[0]) + a.score.split(':')[1] + a.score.split(':')[2]) < parseInt((b.score.split(':')[0]) + b.score.split(':')[1] + b.score.split(':')[2])
         }
         return parseInt(a.score) < parseInt(b.score);
       });
@@ -150,6 +151,18 @@ export class ConsultaEntrenamientoComponent implements OnInit {
     this.dataSource = this.scores;
     if (busq.value != "") {
       this.dataSource = this.scores.filter(score => ((score.usuario.nombre.toLowerCase() + " " + score.usuario.apellido.toLowerCase())).indexOf(busq.value.toLowerCase()) >= 0);
+    }
+  }
+
+  eliminarEntrenamiento() {
+    if (confirm("Eliminar entrenamiento?")) {
+      this.entrenamientoServ.deleteEntrenamiento(this.fg.value.idPlani, this.fg.value.fecha).subscribe({
+        next: res => console.log(res),
+        error: err => console.log(err)
+      });
+      this.fg.get("idPlani").setValue("");
+      this.fg.get("fecha").setValue("");
+      this.entrenamiento = { entrenXPlanis: [[]], nombre: '' };
     }
   }
 

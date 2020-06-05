@@ -47,13 +47,6 @@ export class CargaEntrenamientoComponent implements OnInit {
 
   }
 
-  planisDOM(data) {
-    data.resultado.forEach(plani => {
-      document.getElementById("selectPlanis").innerHTML += `<option value="${plani.idPlanificacion}">${plani.nombre}</option>`
-    })
-  }
-
-
   initSecciones() {
     console.log(this.addMore);
     return this.fb.group({
@@ -90,11 +83,15 @@ export class CargaEntrenamientoComponent implements OnInit {
   }
 
   borrarWod(secIndex: number, wodIndex: number) {
-    this.wods(secIndex).removeAt(wodIndex);
+    if (confirm("Eliminar el Wod?")) {
+      this.wods(secIndex).removeAt(wodIndex);
+    }
   }
 
   borrarSeccion(index: number) {
-    this.secciones().removeAt(index);
+    if (confirm("Eliminar la Seccion?")) {
+      this.secciones().removeAt(index);
+    }
   }
 
   cargarEntrenamiento() {

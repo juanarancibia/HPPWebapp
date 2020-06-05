@@ -16,7 +16,7 @@
 </nav>
  -->
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-menu shadow mb-4">
   <a class="navbar-brand" href="#">HPP Programming</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
     aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,31 +24,54 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/login']">Login <span class="sr-only">Login</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/signup']">SignUp <span class="sr-only">SignUp</span></a>
-      </li>
+    <ul class="navbar-nav ml-auto">
+
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Entrenamiento
-        </a>
+        <a href="#" class="nav-link dropdown-toggle active" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">ENTRENAMIENTO</a>
 
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/consultar-entrenamiento']">Consulta entrenamiento</a>
-          <a class="dropdown-item" [routerLink]="['/carga-entrenamiento']">Carga entrenamiento</a>
-          <a class="dropdown-item" href="#" tabindex="-1" [routerLink]="['/entrenamiento-diario']"
-            routerLinkActive="router-link-active">Entrenamiento del dia</a>
+        <div class="dropdown-menu bg-submenu border-0 ml-3 mt-2" aria-labelledby="navbarDropdown">
+          <a class="nav-link active ml-2" [routerLink]="['/consultar-entrenamiento']">ENTRENAMIENTOS</a>
+          <a class="nav-link active ml-2" [routerLink]="['/carga-entrenamiento']">CARGAR</a>
+          <a class="nav-link active ml-2" [routerLink]="['/modificar-entrenamiento']">MODIFICAR</a>
+          <a class="nav-link active ml-2" href="#" tabindex="-1" [routerLink]="['/entrenamiento-diario']"
+            routerLinkActive="router-link-active">DIARIO</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" tabindex="-1" [routerLink]="['/consulta-scores']"
-          routerLinkActive="router-link-active">Consulta scores</a>
+        <a class="nav-link active" href="#" tabindex="-1" [routerLink]="['/consulta-scores']"
+          routerLinkActive="router-link-active">SCORES</a>
       </li>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle active" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">USUARIOS</a>
+        <div class="dropdown-menu bg-submenu border-0 ml-3 mt-2" aria-labelledby="navbarDropdown">
+          <a class="nav-link active ml-2" href="#" tabindex="-1" [routerLink]="['/alta-usuario']"
+            routerLinkActive="router-link-active">PLANIFICACIÓN</a>
+          <a class="nav-link active ml-2" href="#" tabindex="-1" [routerLink]="['/update-usuario']"
+            routerLinkActive="router-link-active">MODIFICAR</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle active" role="button" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">PERFIL</a>
+        <div class="dropdown-menu bg-submenu border-0 ml-3 mt-2" aria-labelledby="navbarDropdown">
+          <a href="#" class="nav-link active ml-2" [routerLink]="['/modificar-perfil']"
+            routerLinkActive="router-link-active">ACTUALIZAR</a>
+          <a href="#" class="nav-link active ml-2" [routerLink]="['/mis-scores']"
+            routerLinkActive="router-link-active">MIS SCORES</a>
+        </div>
+      </li>
+
+      <li class="nav-item active ml-0 ml-md-4">
+        <a class="nav-link" [routerLink]="['/login']">LOGIN <span class="sr-only">Login</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/signup']">SIGNUP <span class="sr-only">SignUp</span></a>
+      </li>
+
     </ul>
 
   </div>
